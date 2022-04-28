@@ -29,7 +29,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'vitePluginCompressionZip',	// 暴露的全局变量
+      name: 'VitePluginCodeCompression',	// 暴露的全局变量
       // formats: ['es'],
       fileName: (format) => `index.${format}.js` // 输出的包文件名
     },

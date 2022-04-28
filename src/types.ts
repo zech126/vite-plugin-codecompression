@@ -21,7 +21,7 @@ export interface zipType{
   disable?: boolean
   success?: () => void
 }
-export interface VitePluginCompressionZip {
-  codeCompression: VitePluginCompression
-  fileZip: zipType
+export interface VitePluginCodeCompression {
+  codeCompression?: VitePluginCompression
+  fileZip?: zipType
 }

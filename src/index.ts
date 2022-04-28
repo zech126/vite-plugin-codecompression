@@ -1,5 +1,5 @@
 import type { Plugin, ResolvedConfig } from 'vite';
-import { VitePluginCompressionZip } from './types';
+import { VitePluginCodeCompression } from './types';
 import zipHand from './zipHand';
 import compressionCode from './compressionCode';
 // import compressionImage from './compressionImage';
@@ -26,7 +26,7 @@ const imageConfig = {
   }
 }
 
-export default function compression(options:VitePluginCompressionZip = {codeCompression: {}, fileZip: {}}):Plugin {
+export default function compression(options:VitePluginCodeCompression = {}):Plugin {
   return {
     // 插件名称
     name: 'vite:compressionZip',
@@ -41,14 +41,14 @@ export default function compression(options:VitePluginCompressionZip = {codeComp
     // 在 vite 本地服务关闭前，rollup 输出文件到目录前调用
     closeBundle () {
       // 压缩代码
-      const code =  compressionCode(options.codeCompression, config);
+      const code =  compressionCode(options.codeCompression || {}, config);
       // 压缩图片
       // const image = compressionImage(Object.assign(imageConfig, options.imageCompression), config);
       // 压缩完成后再将输出目录生成 zip
       // Promise.all([code, image]).then(() => {
       Promise.all([code]).then(() => {
         // 生成 zip 
-        zipHand(options.fileZip, config);
+        zipHand(options.fileZip || {}, config);
       })
     }
   }
