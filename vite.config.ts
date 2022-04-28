@@ -37,7 +37,7 @@ export default defineConfig({
     // 打包文件设置
     rollupOptions: {
       // 确保外部化处理那些不想打包进库的依赖
-      external: ['chalk'],
+      external: [],
       output: {
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         // globals: {
