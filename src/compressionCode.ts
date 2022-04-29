@@ -87,7 +87,7 @@ function getOutputFileName(filepath: string, ext: string) {
   return `${filepath}${compressExt}`
 }
 
-// Packed output logic
+// 日志输出
 function handleOutputLogger(config: ResolvedConfig, compressMap: Map<string, { size: number; oldSize: number; cname: string }>, algorithm: string) {
   config.logger.info(`\n${chalk.cyan('✨ [compressionCode]:algorithm=' + algorithm)}` +` - compressed file successfully: `);
 
@@ -100,7 +100,7 @@ function handleOutputLogger(config: ResolvedConfig, compressMap: Map<string, { s
     const rName = cname.replace(path.join(config.root, config.build.outDir), config.build.outDir);
     const sizeStr = `${oldSize.toFixed(2)}kb / ${algorithm}: ${size.toFixed(2)}kb`;
     const ratio = `${((1 - (size / oldSize)) * 100).toFixed(2)}%`;
-    config.logger.info(`${chalk.blueBright(rName)}${' '.repeat(2 + maxKeyLength - name.length)}${chalk.dim(sizeStr)} - ${chalk.cyan(ratio)}`)
+    config.logger.info(`${chalk.blueBright(rName)}${' '.repeat(2 + maxKeyLength - name.length)}${chalk.dim(sizeStr)}  ${chalk.green(ratio)}`)
   })
   config.logger.info('\n');
 }
@@ -193,9 +193,7 @@ export default function compressionCode(options:VitePluginCompression = {}, conf
       return Promise.all(handles).then(() => {
         resolve(true);
         success();
-        if (verbose) {
-          handleOutputLogger(config, compressMap, algorithm);
-        }
+        verbose && handleOutputLogger(config, compressMap, algorithm);
       });
     }
     closeBundle();

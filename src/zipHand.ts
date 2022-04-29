@@ -13,7 +13,7 @@ export default function zipHand(options:zipType = {}, config: ResolvedConfig) {
     const {
       disable = false,
       // 压缩包名
-      target = `${config.build.outDir || 'dist'}.zip`,
+      target = `${config.build.outDir || 'dist'}`,
       success = () => {},
     } = options;
     if (disable) {
@@ -50,30 +50,30 @@ export default function zipHand(options:zipType = {}, config: ResolvedConfig) {
     }
     // 压缩文件处理
     const startZIP = () => {
-      const zipName = `${currPath}/${target}`;
+      const zipName = `${currPath}/${target}.zip`;
       // 删除压缩文件
       if(fs.existsSync(zipName) && fs.statSync(zipName).isFile()) {
         fs.unlinkSync(zipName);
       }
       // 资源目录
-      const targetDir = path.join(currPath, directory);
+      const resDir = path.join(currPath, directory);
       
-      if (!path.isAbsolute(targetDir)) {
+      if (!path.isAbsolute(resDir)) {
         console.log('找不到资源目录');
         return;
       }
       // 压缩文件里面新增目录
-      const dirlist = zip.folder(directory);
-      readDir(dirlist, targetDir);
+      const dirlist = zip.folder(target);
+      readDir(dirlist, resDir);
         //设置压缩格式，开始打包
       zip.generateAsync({
-        type: "nodebuffer",//nodejs用
-        compression: "DEFLATE",//压缩算法
-        compressionOptions: {//压缩级别
+        type: "nodebuffer", //nodejs用
+        compression: "DEFLATE", //压缩算法
+        compressionOptions: { //压缩级别
           level: 9
         }
       }).then(async (content:any) =>{
-        console.log(`将${directory}目录添加到${target}`);
+        console.log(`将${directory}目录添加到${target}.zip`);
         //将打包的内容写入压缩包里
         await fs.writeFileSync(zipName, content, "utf-8");
         success();

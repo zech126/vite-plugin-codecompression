@@ -2,10 +2,11 @@ import type { Plugin, ResolvedConfig } from 'vite';
 import { VitePluginCodeCompression } from './types';
 import zipHand from './zipHand';
 import compressionCode from './compressionCode';
-// import compressionImage from './compressionImage';
+import compressionImage from './compressionImage';
 
 let config: ResolvedConfig;
 const imageConfig = {
+  disable: false,
   // gif 压缩
   gifsicle: {
     optimizationLevel: 7,
@@ -23,7 +24,20 @@ const imageConfig = {
   pngquant: {
     quality: [0.8, 0.9],
     speed: 4
-  }
+  },
+  // svg 压缩优化
+  // svgo: {
+  //   plugins: [
+  //     {
+  //       name: "removeViewBox"
+  //     },
+  //     {
+  //       name: "removeEmptyAttrs",
+  //       active: false
+  //     }
+  //   ]
+  // },
+  success: () => {}
 }
 
 export default function compression(options:VitePluginCodeCompression = {}):Plugin {
@@ -43,10 +57,10 @@ export default function compression(options:VitePluginCodeCompression = {}):Plug
       // 压缩代码
       const code =  compressionCode(options.codeCompression || {}, config);
       // 压缩图片
-      // const image = compressionImage(Object.assign(imageConfig, options.imageCompression), config);
+      const image = compressionImage(Object.assign(imageConfig, options.imageCompression), config);
       // 压缩完成后再将输出目录生成 zip
-      // Promise.all([code, image]).then(() => {
-      Promise.all([code]).then(() => {
+      Promise.all([code, image]).then(() => {
+      // Promise.all([code]).then(() => {
         // 生成 zip 
         zipHand(options.fileZip || {}, config);
       })

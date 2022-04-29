@@ -12,6 +12,14 @@ npm install vite-plugin-codecompression -D
   import { defineConfig } from 'vite';
   import vue from '@vitejs/plugin-vue';
   import vitePluginCodecompression from "vite-plugin-codecompression";
+
+  export default defineConfig({
+    plugins: [
+      vue(),
+      vitePluginCodecompression()
+    ]
+  })
+  // 或
   export default defineConfig({
     plugins: [
       vue(),
@@ -23,6 +31,35 @@ npm install vite-plugin-codecompression -D
           threshold: 1025,
           compressionOptions: {},
           deleteOriginFile: false,
+          success: () => {}
+        },
+        imageCompression: {
+          disable: false,
+          gifsicle: {
+            optimizationLevel: 7,
+            interlaced: false
+          },
+          mozjpeg: {
+            quality: 20
+          },
+          optipng: {
+            optimizationLevel: 7
+          },
+          pngquant: {
+            quality: [0.8, 0.9],
+            speed: 4
+          },
+          svgo: {
+            plugins: [
+              {
+                name: "removeViewBox"
+              },
+              {
+                name: "removeEmptyAttrs",
+                active: false
+              }
+            ]
+          },
           success: () => {}
         },
         fileZip: {
