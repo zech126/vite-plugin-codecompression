@@ -33,6 +33,35 @@ npm install vite-plugin-codecompression -D
           deleteOriginFile: false,
           success: () => {}
         },
+        imageCompression: {
+          disable: false,
+          gifsicle: {
+            optimizationLevel: 7,
+            interlaced: false
+          },
+          mozjpeg: {
+            quality: 20
+          },
+          optipng: {
+            optimizationLevel: 7
+          },
+          pngquant: {
+            quality: [0.8, 0.9],
+            speed: 4
+          },
+          svgo: {
+            plugins: [
+              {
+                name: "removeViewBox"
+              },
+              {
+                name: "removeEmptyAttrs",
+                active: false
+              }
+            ]
+          },
+          success: () => {}
+        },
         fileZip: {
           target: ''
           disable: false,

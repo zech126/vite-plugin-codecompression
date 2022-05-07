@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-codecompression",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "license": "MIT",
   "author": "zech126",
   "scripts": {
@@ -26,6 +26,26 @@
     }
   },
   "dependencies": {
+    "@types/imagemin": "^7.0.1",
+    "@types/imagemin-gifsicle": "^7.0.1",
+    "@types/imagemin-jpegtran": "^5.0.1",
+    "@types/imagemin-mozjpeg": "^8.0.1",
+    "@types/imagemin-optipng": "^5.2.1",
+    "@types/imagemin-svgo": "^10.0.0",
+    "@types/imagemin-webp": "^7.0.0",
+    "@types/svgo": "^2.6.1",
+    "chalk": "^4.1.2",
+    "debug": "^4.3.3",
+    "gifsicle": "5.2.0",
+    "imagemin": "^7.0.1",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "imagemin-svgo": "^9.0.0",
+    "imagemin-webp": "^6.0.0",
+    "jpegtran-bin": "^6.0.1",
     "jszip": "^3.9.1"
   },
   "devDependencies": {
