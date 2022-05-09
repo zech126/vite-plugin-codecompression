@@ -5,7 +5,7 @@ yarn add vite-plugin-codecompression -D
 
 npm i vite-plugin-codecompression -D
 
-npm install vite-plugin-codecompression -D
+cnpm install vite-plugin-codecompression -D
 
 # vite 使用
 ```js
@@ -35,6 +35,7 @@ npm install vite-plugin-codecompression -D
         },
         imageCompression: {
           disable: false,
+          filter: /\.(png|jpeg|gif|jpg|bmp|svg)$/i,
           gifsicle: {
             optimizationLevel: 7,
             interlaced: false

@@ -1,6 +1,7 @@
 import { zipType } from './types';
 import { ResolvedConfig } from 'vite';
 
+const chalk = require("chalk");
 //获取文件系统模块，负责文件读写
 const fs = require("fs");
 //工具模块，处理文件路径
@@ -73,7 +74,9 @@ export default function zipHand(options:zipType = {}, config: ResolvedConfig) {
           level: 9
         }
       }).then(async (content:any) =>{
-        console.log(`将${directory}目录添加到${target}.zip`);
+        config.logger.info(`\n${chalk.cyan('✨ [fileZip]:compressed file successfully: ')}`);
+        config.logger.info(chalk.blueBright(`将${directory}目录添加到${target}.zip`));
+        config.logger.info('\n');
         //将打包的内容写入压缩包里
         await fs.writeFileSync(zipName, content, "utf-8");
         success();
